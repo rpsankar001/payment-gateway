@@ -1,0 +1,49 @@
+<form class="credit-card" [formGroup]="cardInfoForm" (ngSubmit)="onSubmit()">
+  <div class="form-header">
+    <h4 class="title">Credit Card Details <button  (click)="router.navigate(['/'])" class="btn btn-secondary float-right">Back</button></h4> 
+  </div>
+
+  <div class="form-body">
+    <!-- Card Number -->
+    <div class="container">
+      <input type="text" class="card-number" formControlName="card_number" placeholder="Card Number">
+      <span class="error" *ngIf="submitted && cardInfoForm.controls['card_number'].invalid">
+        Please provide valid card number.
+      </span>
+    </div>
+    <div class="container">
+      <input type="text" class="card-number" formControlName="card_holder" placeholder="Card Holder">
+      <span class="error" *ngIf="submitted && cardInfoForm.controls['card_holder'].invalid">
+        Please provide valid card holder name.
+      </span>
+    </div>
+
+    <!-- Date Field -->
+    <div class="container">
+    <input class="datePicker" type="text" formControlName="expiry_date" autocomplete="off" placeholder="Expiry Date" name="date" bsDatepicker
+      [bsConfig]="{dateInputFormat: 'MM/YYYY'}" (onShown)="onOpenCalendar($event)">
+      <div class="error" *ngIf="submitted && cardInfoForm.controls['expiry_date'].invalid">
+        Please provide valid expiry date.
+      </div>
+    </div>
+
+    <!-- Card Verification Field -->
+    <div class="card-verification row">
+      <div class="cvv-input container col-md-6 ml-3">
+        <input type="text" formControlName="security_code" placeholder="CVV">
+        <div  class="error" *ngIf="submitted && cardInfoForm.controls['security_code'].invalid">
+          Please provide valid CVV.
+        </div>
+      </div>
+      <div class="cvv-input container col-md-6" style="margin-left: -1rem;">
+        <input type="number" formControlName="amount" placeholder="Amount" min="0">
+        <div  class="error" *ngIf="submitted && cardInfoForm.controls['amount'].invalid">
+          Please provide valid amount.
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="proceed-btn btn btn-primary">Proceed</button>
+  </div>
+</form>
